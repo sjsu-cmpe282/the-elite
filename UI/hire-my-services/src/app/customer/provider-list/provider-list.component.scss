@@ -1,0 +1,65 @@
+.card {
+    margin-bottom: 30px;
+    font-family: 'Quicksand-Semibold';
+}
+
+.img-thumbnail {
+    height: 35vh;
+    width: 35vh;
+    border-radius: 50%;
+    border: 3px solid #3f51b5;
+    position: relative;
+    left: 35px;
+}
+
+.checked {
+    color: #ffc107;
+}
+
+.add-cart {
+    color: green;
+}
+
+.listProvider {
+    margin: 12px 40px 12px 40px;
+}
+
+.listingTop {
+    top: 20px;
+    position: relative;
+    font-family: 'Quicksand-Semibold';
+}
+
+.search {
+    width: 100%;
+}
+
+.header-icon {
+    color: #dc1868;
+}
+
+.filterBox {
+    color: #3f51b5;
+    font-family: 'Quicksand-bold';
+}
+
+.fontFamily {
+    font-family: 'Quicksand-Semibold';
+}
+
+.icon {
+    color: #dc1868;
+    position: relative;
+    top: 2px;
+}
+
+.serviceTitle {
+    position: absolute;
+    margin-left: 7px;
+    color: #3f51b5;
+    font-family: 'Quicksand-bold';
+}
+
+.title {
+    margin: 10px;
+}

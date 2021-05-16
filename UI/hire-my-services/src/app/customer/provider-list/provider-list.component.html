@@ -1,0 +1,76 @@
+<div class="listingTop">
+    <h2 class="title">
+        <mat-icon class="icon">{{icon}}</mat-icon><span class="serviceTitle">{{serviceType| titlecase}}s</span></h2>
+    <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="20px" style="margin:12px">
+        <div fxFlex="0 1 calc(50% - 40px)" fxFlex.lt-sm="100%">
+            <mat-form-field class="search fontFamily">
+                <input matInput placeholder="Search providers by area or city" [(ngModel)]="searchKey" (keyup.enter)="searchProviders()" type="text" name="search" (keyup)="keyupFilter()">
+                <span matSuffix fxHide.lt-md (click)="searchProviders()">
+    <mat-icon class="cursor-pointer">search</mat-icon>
+  </span>
+            </mat-form-field>
+        </div>
+
+        <div fxFlex="0 1 calc(50% - 40px)" fxFlex.lt-sm="100%">
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="fontFamily">
+                        <i class="material-icons header-icon ">filter_alt</i><span class="filterBox">Filter Providers</span>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div fxLayout="row wrap" fxLayout.lt-sm="column">
+                    <div fxFlex="0 1 calc(48% - 40px)" fxFlex.lt-sm="100%">
+                        <mat-label class="fontFamily">By price: </mat-label>
+                        <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="100" max="10000" [(value)]="priceFilter" class="width100"></mat-slider>
+                    </div>
+                    <div fxFlex="0 1 calc(48% - 40px)" fxFlex.lt-sm="100%">
+                        <mat-label class="fontFamily">By Rating: </mat-label>
+                        <mat-slider thumbLabel tickInterval="1" max="5" [(value)]="ratingFilter" class="width100">
+                        </mat-slider>
+                    </div>
+                </div>
+
+                <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="10px">
+                    <button fxFlex="0 1 calc(50% - 32px)" fxFlex.lt-sm="100%" mat-raised-button color="primary" class="fontFamily" (click)="applyFilters()">Apply</button>
+                    <button fxFlex="0 1 calc(50% - 32px)" fxFlex.lt-sm="100%" mat-raised-button color="warn" class="fontFamily" (click)="clearFilters()">Clear</button>
+                </div>
+            </mat-expansion-panel>
+        </div>
+    </div>
+
+    <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="flex-center" fxLayoutGap="30px" class="listProvider" *ngIf="listOfProviders.length">
+        <mat-card fxFlex="0 1 calc(33.3% - 92px)" fxFlex.lt-md="0 1 calc(50% - 32px)" fxFlex.lt-sm="100%" class="card" *ngFor="let provider of listOfProviders;">
+            <mat-card-header>
+                <mat-card-title class="header-icon">{{provider.firstname | titlecase}}&nbsp;&nbsp;{{provider.lastname | titlecase}}</mat-card-title>
+                <mat-card-subtitle>{{provider.area | titlecase}},&nbsp;{{provider.city|titlecase}}</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image *ngIf="provider.image =='None'" src="assets/images/profile.png" class="img-thumbnail" alt="profile-picture">
+            <img mat-card-image *ngIf="provider.image !=='None'" src="{{provider.image}}" class="img-thumbnail" alt="profile-picture">
+
+            <mat-card-content>
+                <div><b class="filterBox">Contact:&nbsp;&nbsp;</b>{{provider.phone}}</div>
+                <div><b class="filterBox">Available on:&nbsp; &nbsp;</b><span *ngFor="let day of provider.days;let isLast=last">{{day}}{{isLast ? '' : ', '}}</span>
+                </div>
+                <div><b class="filterBox">Working hours:&nbsp;&nbsp;</b>{{provider.time}}</div>
+                <div><b class="filterBox">Charge per hour:&nbsp;&nbsp;</b>{{provider.price}}/-</div>
+            </mat-card-content>
+            <mat-card-actions>
+                <div fxLayout="row wrap" fxLayout.lt-sm="column">
+                    <div fxFlex="50%">
+                        <mat-icon class="checked" *ngFor="let fullStar of fullStars(provider.rating)">star</mat-icon>
+                        <mat-icon class="checked" *ngIf="hasHalfStar(provider.rating)">star_half</mat-icon>
+                        <mat-icon *ngFor="let emptyStar of emptyStars(provider.rating)">star_border</mat-icon>
+
+                    </div>
+                    <div fxFlex="50%" fxLayoutAlign="flex-end">
+                        <button mat-raised-button color="primary" class="cursor-pointer" (click)="openAppointmentBookingComp(provider)">Book</button>
+                    </div>
+                </div>
+            </mat-card-actions>
+        </mat-card>
+
+    </div>
+    <div fxLayout="row wrap" *ngIf="!listOfProviders.length" class="search">
+        No Providers Available.
+    </div>
+</div>

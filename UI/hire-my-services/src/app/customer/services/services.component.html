@@ -1,0 +1,13 @@
+<div>
+    <h2 class="header">
+        <span>Services Offered:</span></h2>
+</div>
+<div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="flex-start" fxLayoutGap="10px">
+    <mat-card fxFlex="0 1 calc(33.3% - 32px)" fxFlex.lt-md="0 1 calc(50% - 32px)" fxFlex.lt-sm="100%" class="example-card card" *ngFor="let service of services;" (click)="goToProviderList(service.name, service.icon)">
+        <mat-card-header>
+            <mat-card-title class="title">
+                <mat-icon class="icon">{{service.icon}}</mat-icon><span class="serviceTitle">{{service.name}}</span></mat-card-title>
+        </mat-card-header>
+        <img mat-card-image [src]="service.image" class="img-thumbnail">
+    </mat-card>
+</div>

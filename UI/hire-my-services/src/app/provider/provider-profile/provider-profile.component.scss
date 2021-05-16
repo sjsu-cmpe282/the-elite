@@ -1,0 +1,29 @@
+mat-card {
+    max-width: 400px;
+    margin: 2em auto;
+    text-align: center;
+    font-family: 'Quicksand-Semibold';
+}
+
+mat-form-field {
+    display: block;
+    font-family: 'Quicksand-Semibold';
+}
+
+.skillset {
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.img-thumbnail {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border-radius: 50%;
+    border: 3px solid #3f51b5;
+}
+
+.fontFamily {
+    font-family: 'Quicksand-bold';
+}
